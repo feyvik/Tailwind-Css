@@ -22,8 +22,10 @@
                 ></textarea>
               </div>
               <div class="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mx-2">
+                <label class="text-gray-700 text-left"
+                  >Where is this invoice going to?</label
+                >
                 <textarea
-                  placeholder="Where is this invoice going to?"
                   type="text"
                   id="username"
                   class="border border-gray-500 rounded w-full py-2 px-3 text-gray-700"

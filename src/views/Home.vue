@@ -9,8 +9,10 @@
           <form class="container mx-auto px-10">
             <div class="flex flex-wrap mb-4 justify-between">
               <div class="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mx-2">
+                <label class="text-gray-700 text-left"
+                  >Who is this invoice from?</label
+                >
                 <textarea
-                  placeholder="Who is this invoice from?"
                   type="text"
                   id="username"
                   class="border border-gray-500 rounded w-full py-2 px-3 text-gray-700"

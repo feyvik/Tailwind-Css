@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6 ">
+    <nav class="flex items-center justify-between flex-wrap bg-500 p-6 ">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <svg
           class="fill-current h-8 w-8 mr-2"
@@ -29,4 +29,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.bg-500 {
+  background-color: #012a7a;
+}
+</style>

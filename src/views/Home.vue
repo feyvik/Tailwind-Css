@@ -128,47 +128,49 @@
         </div>
       </div>
 
-      <div id="display">
-        <div class="flex flex-wrap border-b border-gray-500 border-l border-r">
-          <div class="w-1/6 pl-2 pr-2">
-            <p>x</p>
-          </div>
-          <div class="w-2/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="text"
-              placeholder="Description"
-              v-model="description"
-            />
-          </div>
-          <div class="w-1/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="number"
-              placeholder="0.00"
-              v-model="rate"
-            />
-          </div>
-          <div class="w-1/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="number"
-              placeholder="0.00"
-              v-model="qty"
-            />
-          </div>
-          <div class="w-1/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="number"
-              placeholder="0.00"
-              v-model="amount"
-            />
-          </div>
+      <div
+        v-for="(item, index) in items"
+        :key="index"
+        class="flex flex-wrap border-b border-gray-500 border-l border-r"
+      >
+        <div class="w-1/6 pl-2 pr-2">
+          <p>x</p>
+        </div>
+        <div class="w-2/6 pl-2 pr-2">
+          <input
+            class="border-gray-600 w-full py-2"
+            id="B_name"
+            type="text"
+            placeholder="Description"
+            v-model="item.description"
+          />
+        </div>
+        <div class="w-1/6 pl-2 pr-2">
+          <input
+            class="border-gray-600 w-full py-2"
+            id="B_name"
+            type="number"
+            placeholder="0.00"
+            v-model="item.rate"
+          />
+        </div>
+        <div class="w-1/6 pl-2 pr-2">
+          <input
+            class="border-gray-600 w-full py-2"
+            id="B_name"
+            type="number"
+            placeholder="0.00"
+            v-model="item.qty"
+          />
+        </div>
+        <div class="w-1/6 pl-2 pr-2">
+          <input
+            class="border-gray-600 w-full py-2"
+            id="B_name"
+            type="number"
+            placeholder="0.00"
+            v-model="item.amount"
+          />
         </div>
       </div>
 
@@ -246,10 +248,14 @@ export default {
       clientEmail: "",
       clientPhone: "",
       clientAddress: "",
-      description: "",
-      rate: "",
-      qty: "",
-      amount: "",
+      items: [
+        {
+          description: "",
+          rate: "",
+          qty: "",
+          amount: ""
+        }
+      ],
       condition: "",
       note: ""
     };
@@ -259,50 +265,12 @@ export default {
   },
   methods: {
     addItems() {
-      const addNextItem = document.getElementById("display");
-      addNextItem.innerHTML += `
-      <div class="flex flex-wrap border-b border-gray-500 border-l border-r">
-          <div class="w-1/6 pl-2 pr-2">
-            <p>x</p>
-          </div>
-          <div class="w-2/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="text"
-              placeholder="Description"
-              v-model="description"
-            />
-          </div>
-          <div class="w-1/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="number"
-              placeholder="0.00"
-              v-model="rate"
-            />
-          </div>
-          <div class="w-1/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="number"
-              placeholder="0.00"
-              v-model="qty"
-            />
-          </div>
-          <div class="w-1/6 pl-2 pr-2">
-            <input
-              class="border-gray-600 w-full py-2"
-              id="B_name"
-              type="number"
-              placeholder="0.00"
-              v-model="amount"
-            />
-          </div>
-        </div>
-      `;
+      this.items.push({
+        description: "",
+        rate: "",
+        qty: "",
+        amount: ""
+      });
     },
     sendInvoice() {
       const createInvoice = {
@@ -314,16 +282,13 @@ export default {
         clientEmail: this.clientEmail,
         clientPhone: this.clientPhone,
         clientAddress: this.clientAddress,
-        description: this.description,
-        rate: this.rate,
-        qty: this.qty,
-        amount: this.amount,
+        items: this.items,
         condition: this.condition,
         note: this.note
       };
       fire
         .database()
-        .ref("messages")
+        .ref("createInvoice")
         .push(createInvoice);
       this.businessName = "";
       this.businessEmail = "";
@@ -333,14 +298,24 @@ export default {
       this.clientEmail = "";
       this.clientPhone = "";
       this.clientAddress = "";
-      this.description = "";
-      this.rate = "";
-      this.qty = "";
-      this.amount = "";
+      this.items = [
+        {
+          description: "",
+          rate: "",
+          qty: "",
+          amount: ""
+        }
+      ];
       this.condition = "";
       this.note = "";
       console.log(createInvoice);
+    },
+    getAmount() {
+      console.log(this.items.amount);
     }
+  },
+  mounted() {
+    this.getAmount();
   }
 };
 </script>
